@@ -46,10 +46,16 @@ if __name__ == '__main__':
                 note_id = numeric_input("Введите 'id' редактируемой записи: ", 'id')
                 note_header = input("Введите новый заголовок заметки: ")
                 note_body = input("Введите новое тело заметки: ")
-                notebook.edit_note(note_id, note_header, note_body)
+                try:
+                    notebook.edit_note(note_id, note_header, note_body)
+                except KeyError as ex:
+                    print(ex)
             case 'delete':
                 note_id = numeric_input("Введите 'id' удаляемой записи: ", 'id')
-                notebook.delete_note(note_id)
+                try:
+                    notebook.delete_note(note_id)
+                except KeyError as ex:
+                    print(ex)
             case 'print':
                 print(notebook)
             case 'filter':

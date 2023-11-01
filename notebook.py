@@ -46,10 +46,14 @@ class Notebook:
                                    create_time=datetime.strptime(record['create_time'], "%d.%m.%Y %H:%M:%S"),
                                    change_time=datetime.strptime(record['change_time'], "%d.%m.%Y %H:%M:%S")
                                    ) for record in data]
-            self.max_id = max([note.note_id for note in self.notes])
+            if len(self.notes) == 0:
+                self.max_id = 0
+            else:
+                self.max_id = max([note.note_id for note in self.notes])
         except FileNotFoundError:
-            with open('notes.json', mode='w'):
-                pass
+            empty_list = []
+            with open('notes.json', mode='w') as file:
+                json.dump(empty_list, file)
 
     def write_notes(self):
         with open('notes.json', mode='w') as file:
