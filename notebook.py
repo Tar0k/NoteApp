@@ -58,7 +58,7 @@ class Notebook:
                 json.dump(data_to_write, file)
         self.read_notes()
 
-    def print_filter_by_date(self, start: datetime, end=datetime.now()) -> str:
+    def filter_by_date(self, start: datetime, end=datetime.now()) -> str:
         filtered_notes = [note for note in self.notes if start <= note.change_time <= end]
         return '\n====================================\n'.join([str(note) for note in filtered_notes])
 

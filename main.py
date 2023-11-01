@@ -56,9 +56,9 @@ if __name__ == '__main__':
                 date_range = date_range_input()
                 match len(date_range):
                     case 1:
-                        filtered_notes = notebook.print_filter_by_date(start=date_range[0])
+                        filtered_notes = notebook.filter_by_date(start=date_range[0])
                     case 2:
-                        filtered_notes = notebook.print_filter_by_date(start=date_range[0], end=date_range[1])
+                        filtered_notes = notebook.filter_by_date(start=date_range[0], end=date_range[1])
                     case _:
                         filtered_notes = ""
                 print(filtered_notes)
