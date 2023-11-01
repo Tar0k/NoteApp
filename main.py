@@ -34,6 +34,7 @@ if __name__ == '__main__':
 
     notebook = Notebook()
 
+    print("Доступные команды: add, edit, delete, print, filter")
     while True:
         command = input("Введите команду: ")
         match command:
@@ -47,7 +48,6 @@ if __name__ == '__main__':
                 note_body = input("Введите новое тело заметки: ")
                 notebook.edit_note(note_id, note_header, note_body)
             case 'delete':
-                print(notebook)
                 note_id = numeric_input("Введите 'id' удаляемой записи: ", 'id')
                 notebook.delete_note(note_id)
             case 'print':
@@ -62,5 +62,8 @@ if __name__ == '__main__':
                     case _:
                         filtered_notes = ""
                 print(filtered_notes)
+            case 'help':
+                print("Доступные команды: add, edit, delete, print, filter")
             case 'exit':
                 break
+
