@@ -1,40 +1,23 @@
-from notebook import Notebook
+from datetime import datetime
+
+"""
+Пока не внедрил
+"""
 
 
-def numeric_input(input_message, variable_name):
-    number = ''
-    while not number.isnumeric():
-        number = input(input_message)
-        if not number.isnumeric():
-            print(f"'{variable_name}' должно быть числовым значением")
-    return number
+class Note:
+    def __init__(self, note_id, header, body,
+                 create_time=datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+                 change_time=datetime.now().strftime("%d.%m.%Y %H:%M:%S")):
+        self.note_id = note_id
+        self.header = header
+        self.body = body
+        self.create_time = create_time
+        self.change_time = change_time
 
-
-if __name__ == '__main__':
-
-    notebook = Notebook()
-
-    while True:
-        command = input("Введите команду: ")
-        match command:
-            case 'add':
-                note_header = input("Введите заголовок заметки: ")
-                note_body = input("Введите тело заметки: ")
-                notebook.add_note(note_header, note_body)
-            case 'edit':
-                note_id = numeric_input("Введите 'id' редактируемой записи: ", 'id')
-                note_header = input("Введите новый заголовок заметки: ")
-                note_body = input("Введите новое тело заметки: ")
-                notebook.edit_note(note_id, note_header, note_body)
-            case 'delete':
-                print(notebook)
-                note_id = numeric_input("Введите 'id' удаляемой записи: ", 'id')
-                notebook.delete_note(note_id)
-            case 'print':
-                print(notebook)
-            case 'exit':
-                break
-
-
-
-
+    def __str__(self):
+        return (f"ID: {self.note_id}\n"
+                f"Заголовок: {self.header}\n"
+                f"Тело: {self.body}\n"
+                f"Дата создания: {self.create_time}, Дата изменения: {self.change_time}"
+                )

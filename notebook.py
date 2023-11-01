@@ -16,25 +16,25 @@ class Notebook:
             "id": new_id,
             "header": header,
             "body": body,
-            "create_time": datetime.now().strftime("%d.%m%Y %H:%M:%S"),
-            "change_time": datetime.now().strftime("%d.%m%Y %H:%M:%S")
+            "create_time": datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+            "change_time": datetime.now().strftime("%d.%m.%Y %H:%M:%S")
         })
         self.write_notes()
 
     def edit_note(self, id_number: int, header, body):
         for note in self.notes:
             print(type(note['id']))
-            if note['id'] == int(id_number):
+            if note['id'] == id_number:
                 note['header'] = header
                 note['body'] = body
-                note['change_time'] = datetime.now().strftime("%d.%m%Y %H:%M:%S")
+                note['change_time'] = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
                 self.write_notes()
                 return
         raise KeyError(f"Запись с индексом {id_number} не найдена")
 
     def delete_note(self, id_number: int):
         for (index, note) in enumerate(self.notes):
-            if note['id'] == int(id_number):
+            if note['id'] == id_number:
                 self.notes.pop(index)
                 self.write_notes()
                 return
@@ -53,6 +53,18 @@ class Notebook:
         with open('notes.json', mode='w') as file:
             json.dump(self.notes, file)
         self.read_notes()
+
+    def print_filter_by_date(self, start: datetime, end=datetime.now()) -> str:
+        print(start, end)
+        filtered_records = [note for note in self.notes if start <= datetime.strptime(note['change_time'], "%d.%m.%Y %H:%M:%S") <= end]
+        text = []
+        for note in filtered_records:
+            text.append(f"ID: {note['id']}\n"
+                        f"Заголовок: {note['header']}\n"
+                        f"Тело: {note['body']}\n"
+                        f"Дата создания: {note['create_time']}, Дата изменения: {note['change_time']}"
+                        )
+        return '\n====================================\n'.join(text)
 
     def __str__(self):
         text = []
