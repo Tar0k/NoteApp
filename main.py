@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     notebook = Notebook()
 
-    print("Доступные команды: add, edit, delete, print, filter")
+    print("Доступные команды: add, edit, delete, print, filter, help")
     while True:
         command = input("Введите команду: ")
         match command:
@@ -63,7 +63,7 @@ if __name__ == '__main__':
                         filtered_notes = ""
                 print(filtered_notes)
             case 'help':
-                print("Доступные команды: add, edit, delete, print, filter")
+                print("Доступные команды: add, edit, delete, print, filter, help")
             case 'exit':
                 break
 
